@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe4e1;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #ff69b4;
+            animation: bounce 1.5s infinite;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        .yes {
+            background-color: #ff69b4;
+            color: white;
+        }
+        .yes:hover {
+            transform: scale(1.1);
+        }
+        .no {
+            background-color: #d3d3d3;
+            color: black;
+            position: absolute;
+            transition: all 0.3s;
+        }
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        .hidden {
+            display: none;
+            animation: pop 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes heartRain {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 24px;
+            animation: heartRain 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will You Be My Valentine? 💖</h1>
+        <div class="buttons">
+            <button class="btn yes" onclick="showLove()">Yes</button>
+            <button class="btn no" onmouseover="moveNo()">No</button>
+        </div>
+        <h2 class="hidden" id="loveMessage">Yay! ❤️ Can't wait for Valentine's Day with you! 🎉</h2>
+    </div>
+    
+    <script>
+        function showLove() {
+            document.getElementById('loveMessage').classList.remove('hidden');
+            createHearts();
+        }
+        function moveNo() {
+            const noBtn = document.querySelector('.no');
+            noBtn.style.top = Math.random() * window.innerHeight + 'px';
+            noBtn.style.left = Math.random() * window.innerWidth + 'px';
+        }
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = '💖';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = '-20px';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
